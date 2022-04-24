@@ -1,0 +1,33 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:mydb
+    username: sa
+    password:
+    driverClassName: org.h2.Driver
+  jpa:
+    spring.jpa.database-platform: org.hibernate.dialect.H2Dialect
+
+  h2:
+    console:
+      enabled: true
+      path: /h2
+
+  kafka:
+    producer:
+      bootstrap-servers: 127.0.0.1:9092
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+#      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: com.letscode.transaction.payload.JMS.serializer.TransactionSerializer
+      group-id: group_id
+
+auto:
+  create:
+    topics:
+      enable: true
+
+server:
+  port: ${port:8081}
+
+kafka:
+  topic:
+    name: eighteleven.samples.topic
